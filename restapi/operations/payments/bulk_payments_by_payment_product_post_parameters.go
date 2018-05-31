@@ -375,7 +375,7 @@ func (o *BulkPaymentsByPaymentProductPostParams) bindPSUipAddress(rawData []stri
 		return err
 	}
 
-	o.PSUIPAddress = raw
+	o.PSUipAddress = raw
 
 	return nil
 }
