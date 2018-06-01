@@ -2,7 +2,7 @@
 
 // /**
 //  * OpenPSD PSD2 Server
-//  * (C) 2018 by OpenPSD - openpsd.org
+//  * 2018 - OpenPSD - openpsd.org
 //  * Released under the GNU General Public License
 //  */
 
