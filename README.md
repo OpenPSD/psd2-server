@@ -1,13 +1,27 @@
 # OpenPSD PSD2 Server
 
-## code generation 
+Reference implementation for the Berlin Group PSD2 specification.
 
-Basic server implementation is done by code generation based on the a swagger 2.0 specification. The swagger 2.0 spec is derived from the original openapi 3.0 spec.
+Note: Work in progress!
 
-https://goswagger.io/generate/server.html
+## requirements
 
-```
-swagger generate server --name=openpsd --copyright-file=LICENSEHEADER --spec=psd2_swagger2.yaml
-swagger generate client --name=openpsd --copyright-file=LICENSEHEADER --spec=psd2_swagger2.yaml
-go get -u -f ./...
-```
+* Go 1.9.x
+
+Working GO environment is expected as described [here] (https://golang.org/doc/code.html#GOPATH)
+
+## install
+
+`make install`
+
+Will install `psd2-server` to you default `go` binary path.
+
+## run
+
+`make run`
+
+Will start a http server at localhost:8000
+
+## use
+
+`GET http://localhost:8000/accounts`

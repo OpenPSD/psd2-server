@@ -25,5 +25,9 @@ func createAccounts() []models.AccountDetails {
 	a.Name = "DemoAccount1"
 	accounts = append(accounts, a)
 
+	b := models.NewAccountDetails("CHF")
+	b.Name = "DemoAccount2"
+	accounts = append(accounts, b)
+
 	return accounts
 }

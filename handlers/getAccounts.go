@@ -3,7 +3,6 @@ package accounts
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -17,6 +16,7 @@ func GetAccountsByID(w http.ResponseWriter, r *http.Request, ps httprouter.Param
 
 // GetAccounts returns a list of accounts
 func GetAccounts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	log.Println(data.Bank.AccountProvider.GetAccounts())
 	json.NewEncoder(w).Encode(data.Bank.AccountProvider.GetAccounts())
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
 }
