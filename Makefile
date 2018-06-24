@@ -13,3 +13,7 @@ install: install-dependencies
 run: install
 	@echo "Run $(APP_NAME)"
 	$(APP_NAME)
+
+tests:
+	@echo "Run tests"
+	$(GO_CMD) test ./...

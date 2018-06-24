@@ -24,3 +24,7 @@ Will start a http server at localhost:8000
 ## use
 
 `GET http://localhost:8000/accounts`
+
+## test
+
+`make test` will run all unit tests
