@@ -3,10 +3,11 @@ package accounts
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/openpsd/psd2-server/models"
+	"github.com/openpsd/psd2-server/data"
 )
 
 // GetAccountsByID return an account by ID
@@ -16,6 +17,6 @@ func GetAccountsByID(w http.ResponseWriter, r *http.Request, ps httprouter.Param
 
 // GetAccounts returns a list of accounts
 func GetAccounts(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	var accounts []models.AccountDetails
-	json.NewEncoder(w).Encode(accounts)
+	log.Println(data.Bank.AccountProvider.GetAccounts())
+	json.NewEncoder(w).Encode(data.Bank.AccountProvider.GetAccounts())
 }

@@ -15,6 +15,13 @@ type AccountDetails struct {
 	Name            string     `json:"name,omitempty"`
 	Pan             string     `json:"pan,omitempty"`
 	Product         string     `json:"product,omitempty"`
-	Resourceid      string     `json:"resourceid,omitempty"`
+	ResourceID      string     `json:"resourceid,omitempty"`
 	Usage           string     `json:"usage,omitempty"`
+}
+
+func NewAccountDetails(currency string) AccountDetails {
+	c := &currency
+	return AccountDetails{
+		Currency: c,
+	}
 }

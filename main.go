@@ -8,6 +8,7 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/justinas/alice"
+	"github.com/openpsd/psd2-server/data"
 	"github.com/openpsd/psd2-server/handlers"
 )
 
@@ -21,6 +22,7 @@ func index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 func main() {
 	log.Println("start PSD2 reference implementation server")
+	data.Bank = data.NewSandboxBank()
 	routes := createRoutes()
 
 	chain := alice.New(timeoutHandler).Then(routes)
