@@ -16,12 +16,12 @@ func TestContentTypeCheck(t *testing.T) {
 	h.ServeHTTP(rr, req)
 	t.Logf("test if request status is set to %d if content-type is not checked", http.StatusNotAcceptable)
 	if status := rr.Code; status != http.StatusNotAcceptable {
-		t.Errorf("Wrong status. Want %d Got %d", http.StatusNotAcceptable, status)
+		t.Errorf("want %d got %d", http.StatusNotAcceptable, status)
 	}
 
 	t.Logf("test if request status processed if content-type is set correctly")
 	req.Header.Set(header.ContentType, header.ApplicationJSON)
 	if status := rr.Code; status != http.StatusNotAcceptable {
-		t.Errorf("Wrong status. Want %d Got %d", http.StatusOK, status)
+		t.Errorf("want %d got %d", http.StatusOK, status)
 	}
 }

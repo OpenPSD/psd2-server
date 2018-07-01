@@ -16,6 +16,6 @@ func TestGetAccounts(t *testing.T) {
 	req.Header.Set(header.ContentType, header.ApplicationJSON)
 	h.ServeHTTP(rr, req)
 	if status := rr.Code; status != http.StatusOK {
-		t.Errorf("Wrong status")
+		t.Errorf("want %d got %d", http.StatusOK, status)
 	}
 }
