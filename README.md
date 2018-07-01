@@ -9,6 +9,9 @@ Note: Work in progress!
 * Go 1.9.x
 
 Working GO environment is expected as described [here](https://golang.org/doc/code.html#GOPATH) 
+
+Note: If you are on a Windows environment, you have to follow the steps described in the `Makefile` manually
+
 ## install
 
 `make install`

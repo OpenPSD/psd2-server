@@ -1,4 +1,4 @@
-package accounts
+package api
 
 import (
 	"net/http"

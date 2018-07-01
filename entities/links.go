@@ -1,4 +1,4 @@
-package models
+package entities
 
 type Links struct {
 	Account                    string `json:"account,omitempty"`

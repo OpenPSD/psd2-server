@@ -1,4 +1,4 @@
-package models
+package entities
 
 type AccountDetails struct {
 	Links           Links      `json:"_links,omitempty"`
