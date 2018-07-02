@@ -1,5 +1,7 @@
 package entities
 
+import "encoding/json"
+
 type Links struct {
 	Account                    string `json:"account,omitempty"`
 	AuthoriseTransaction       string `json:"authoriseTransaction,omitempty"`
@@ -19,4 +21,22 @@ type Links struct {
 	UpdateProprietaryData      string `json:"updateProprietaryData,omitempty"`
 	UpdatePsuAuthentication    string `json:"updatePsuAuthentication,omitempty"`
 	UpdatePsuIdentification    string `json:"updatePsuIdentification,omitempty"`
+}
+
+// Marshal interface implementation
+func (m *Links) Marshal() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return json.Marshal(m)
+}
+
+// Unmarshal interface implementation
+func (m *Links) Unmarshal(b []byte) error {
+	var res Links
+	if err := json.Unmarshal(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
 }

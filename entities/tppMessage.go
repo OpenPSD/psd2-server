@@ -1,5 +1,9 @@
 package entities
 
+import (
+	"encoding/json"
+)
+
 // TppMessage contains information for the TPP
 type TppMessage struct {
 	// Required: true
@@ -24,6 +28,24 @@ func NewTppMessage(text string, category Category, code MessageCode, path string
 		Code:     code,
 		Path:     path,
 	}
+}
+
+// Marshal interface implementation
+func (m *TppMessage) Marshal() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return json.Marshal(m)
+}
+
+// Unmarshal interface implementation
+func (m *TppMessage) Unmarshal(b []byte) error {
+	var res TppMessage
+	if err := json.Unmarshal(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
 }
 
 // MessageCode indicates the message category

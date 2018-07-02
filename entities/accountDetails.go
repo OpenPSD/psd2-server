@@ -1,5 +1,7 @@
 package entities
 
+import "encoding/json"
+
 type AccountDetails struct {
 	Links           Links      `json:"_links,omitempty"`
 	Balances        []*Balance `json:"balances"`
@@ -24,4 +26,22 @@ func NewAccountDetails(currency string) AccountDetails {
 	return AccountDetails{
 		Currency: c,
 	}
+}
+
+// Marshal interface implementation
+func (m *AccountDetails) Marshal() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return json.Marshal(m)
+}
+
+// Unmarshal interface implementation
+func (m *AccountDetails) Unmarshal(b []byte) error {
+	var res AccountDetails
+	if err := json.Unmarshal(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
 }
