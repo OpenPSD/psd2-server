@@ -10,6 +10,7 @@ Note: Work in progress!
 
 Working GO environment is expected as described [here](https://golang.org/doc/code.html#GOPATH) 
 
+
 Note: If you are on a Windows environment, you have to follow the steps described in the `Makefile` manually
 
 ## install
@@ -27,6 +28,7 @@ Will start a http server at localhost:8000
 ## use
 
 `GET http://localhost:8000/accounts`
+Provide the necessary header file for JSON. You can not directly call the URL from the browser
 
 ## test
 
