@@ -10,7 +10,7 @@ Note: Work in progress!
 
 Working GO environment is expected as described [here](https://golang.org/doc/code.html#GOPATH) 
 
-Note: If you are on a Windows environment, you have to follow the steps described in the `Makefile` manually
+Note: If you are on a Windows environment, you have to follow the steps described in the `Makefile` manually.
 
 ## install
 
