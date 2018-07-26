@@ -2,6 +2,8 @@ package api
 
 import (
 	"fmt"
+	"io/ioutil"
+	"log"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -10,68 +12,22 @@ import (
 // InitiatePayment returns an payment by ID
 func (s Psd2HttpServer) InitiatePayment(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	//fmt.Fprintf(w, "InitiatePayment with method: %s \n", ps.ByName("payment-product"))
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		log.Printf("Error reading body: %v", err)
+		http.Error(w, "can't read body", http.StatusBadRequest)
+		return
+	} else {
+		log.Printf("Body: %v", body)
+	}
+
 	ctResponse := `{
-		"transactionStatus": "ACTC",
-		"paymentId": "0007.01",
-		"transactionFees": {
-		  "currency": "EUR",
-		  "amount": "0.42"
-		},
-		"transactionFeeIndicator": true,
-		"scaMethods": [
-		  {
-			"authenticationType": "SMS_OTP",
-			"authenticationVersion": "string",
-			"authenticationMethodId": "string",
-			"name": "string",
-			"explanation": "string"
-		  }
-		],
-		"chosenScaMethod": {
-		  "authenticationType": "SMS_OTP",
-		  "authenticationVersion": "string",
-		  "authenticationMethodId": "string",
-		  "name": "string",
-		  "explanation": "string"
-		},
-		"challengeData": {
-		  "image": "string",
-		  "data": "string",
-		  "imageLink": "string",
-		  "otpMaxLength": 0,
-		  "otpFormat": "characters",
-		  "additionalInformation": "string"
-		},
+		"transactionStatus": "RCVD",
+		"paymentId": "axa-pay-paymentid-1234",
 		"_links": {
-		  "scaRedirect": "string",
-		  "scaOAuth": "string",
-		  "updatePsuIdentification": "string",
-		  "updateProprietaryData": "string",
-		  "updatePsuAuthentication": "string",
-		  "selectAuthenticationMethod": "string",
-		  "authoriseTransaction": "string",
-		  "self": "string",
-		  "status": "string",
-		  "account": "string",
-		  "balances": "string",
-		  "transactions": "string",
-		  "transactionsDetails": "string",
-		  "first": "string",
-		  "next": "string",
-		  "previous": "string",
-		  "last": "string",
-		  "download": "string"
-		},
-		"psuMessage": "string",
-		"tppMessages": [
-		  {
-			"category": "ERROR",
-			"code": "TOKEN_INVALID",
-			"text": "additional text information of the ASPSP up to 512 characters",
-			"path": "string"
-		  }
-		]
-	  }`
+	"startAuthenticationWithPsuAuthentication": {"href": "/payments/axa-pay-paymentid-1234/authorisations"},
+	"self": {"href": "/payments/axa-pay-paymentid-1234"} }
+	}`
 	fmt.Fprintf(w, ctResponse)
 
 }
