@@ -42,7 +42,8 @@ func (s Psd2HttpServer) createRoutes() http.Handler {
 	routes.GET("/accounts/:account-id", s.GetAccountsByID)
 	routes.GET("/accounts", s.GetAccounts)
 	routes.POST("/payments/:paymentid", s.InitiatePayment)
-	routes.POST("/payments/:paymentid/authorisations", s.AuthorisePayment)
+	routes.POST("/payments/:paymentid/authorisations", s.CreateAuthorisedPayment)
+	routes.PUT("/payments/:paymentid/authorisations/:authorisationid", s.AuthorisePayment)
 
 	return routes
 }
