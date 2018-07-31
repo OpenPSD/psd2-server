@@ -7,9 +7,9 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// CreateAuthorisedPayment creates authorisation for a payment by ID
-func (s Psd2HttpServer) CreateAuthorisedPayment(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	fmt.Println("Create authorisation payment with ID:", ps.ByName("paymentid"))
+// StartAuthorisationWithPsuAuthentication creates authorisation for a payment by ID
+func (s Psd2HttpServer) StartAuthorisationWithPsuAuthentication(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	fmt.Println("StartAuthorisationWithPsuAuthentication payment with ID:", ps.ByName("paymentid"))
 
 	authoriseResponse := `{
 		"scaStatus": "received",

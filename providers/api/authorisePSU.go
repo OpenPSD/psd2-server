@@ -9,7 +9,7 @@ import (
 )
 
 // AuthorisePayment authorises a payment by payment- and authorisation ID
-func (s Psd2HttpServer) AuthorisePayment(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+func (s Psd2HttpServer) AuthorisePSU(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	fmt.Println("Authorise payment with payment ID:", ps.ByName("paymentid"))
 	fmt.Println("Authorise payment with authorisation ID:", ps.ByName("authorisationid"))
 

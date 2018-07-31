@@ -36,14 +36,15 @@ func (s Psd2HttpServer) index(w http.ResponseWriter, r *http.Request, _ httprout
 	fmt.Fprint(w, "PSD2 server reference implementation!\n")
 }
 
+// Needs to be refactored
 func (s Psd2HttpServer) createRoutes() http.Handler {
 	routes := httprouter.New()
 	routes.GET("/", s.index)
 	routes.GET("/accounts/:account-id", s.GetAccountsByID)
 	routes.GET("/accounts", s.GetAccounts)
 	routes.POST("/payments/:paymentid", s.InitiatePayment)
-	routes.POST("/payments/:paymentid/authorisations", s.CreateAuthorisedPayment)
-	routes.PUT("/payments/:paymentid/authorisations/:authorisationid", s.AuthorisePayment)
+	routes.POST("/payments/:paymentid/authorisations", s.StartAuthorisationWithPsuAuthentication)
+	routes.PUT("/payments/:paymentid/authorisations/:authorisationid", s.AuthorisePSU)
 
 	return routes
 }
