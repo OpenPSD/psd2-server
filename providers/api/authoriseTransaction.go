@@ -13,27 +13,26 @@ func (s Psd2HttpServer) AuthoriseTransaction(w http.ResponseWriter, r *http.Requ
 	fmt.Println("Authorise transaction with payment ID:", ps.ByName("paymentid"))
 	fmt.Println("Authorise transaction with authorisation ID:", ps.ByName("authorisationid"))
 
-	type AuthorisePayment struct {
-		PsuData struct {
-			Password string `json:"password"`
-		} `json:"psuData"`
+	type AuthoriseTransaction struct {
+		ScaAuthenticationData string `json:"scaAuthenticationData"`
 	}
 
-	var authorisePayment AuthorisePayment
+	var authoriseTransaction AuthoriseTransaction
 
-	err := json.NewDecoder(r.Body).Decode(&authorisePayment)
+	err := json.NewDecoder(r.Body).Decode(&authoriseTransaction)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
+		fmt.Println("Authorise Transaction Request Error: ", err)
 		return
 	}
-	fmt.Println("Authorise Request Body: ", authorisePayment)
+	fmt.Println("Authorise Transaction Request Body: ", authoriseTransaction)
 
 	authoriseResponse := `{
-		"scaStatus": "psuAuthenticated",
-	  "_links":{
-	  "authoriseTransaction": {"href": "/payments/axa-pay-paymentid-1234/authorisations/123axa-auth456"}
-		}
-	  }`
+		"scaStatus": "finalised",
+		"_links":{
+	  "scaStatus": {"href":"/payments/axa-pay-paymentid-1234/authorisations/123axa-auth456"}
+	  } }
+		`
 	fmt.Fprintf(w, authoriseResponse)
 
 }

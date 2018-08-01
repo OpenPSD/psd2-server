@@ -8,10 +8,10 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// AuthorisePayment authorises a payment by payment- and authorisation ID
+// AuthorisePSU authorises a PSU by payment- and authorisation ID
 func (s Psd2HttpServer) AuthorisePSU(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	fmt.Println("Authorise payment with payment ID:", ps.ByName("paymentid"))
-	fmt.Println("Authorise payment with authorisation ID:", ps.ByName("authorisationid"))
+	fmt.Println("Authorise PSU with payment ID:", ps.ByName("paymentid"))
+	fmt.Println("Authorise PSU with authorisation ID:", ps.ByName("authorisationid"))
 
 	type AuthorisePayment struct {
 		PsuData struct {
@@ -24,9 +24,10 @@ func (s Psd2HttpServer) AuthorisePSU(w http.ResponseWriter, r *http.Request, ps 
 	err := json.NewDecoder(r.Body).Decode(&authorisePayment)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
+		fmt.Println("Authorise PSU Request Error: ", err)
 		return
 	}
-	fmt.Println("Authorise Request Body: ", authorisePayment)
+	fmt.Println("Authorise PSU Request Body: ", authorisePayment)
 
 	authoriseResponse := `{
 		"scaStatus": "psuAuthenticated",
