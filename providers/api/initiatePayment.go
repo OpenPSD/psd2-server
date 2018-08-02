@@ -10,6 +10,7 @@ import (
 
 // InitiatePayment returns an payment by ID
 func (s Psd2HttpServer) InitiatePayment(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	fmt.Println("Initiate Payment")
 
 	type PaymentsSepaCT struct {
 		CreditorAccount struct {
@@ -27,7 +28,7 @@ func (s Psd2HttpServer) InitiatePayment(w http.ResponseWriter, r *http.Request, 
 	}
 
 	var paymentsSepaCT PaymentsSepaCT
-
+	fmt.Println("Initiate Payment Body: ", r.Body)
 	err := json.NewDecoder(r.Body).Decode(&paymentsSepaCT)
 	if err != nil {
 		http.Error(w, err.Error(), 400)
